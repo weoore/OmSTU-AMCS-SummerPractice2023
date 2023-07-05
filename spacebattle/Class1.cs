@@ -1,7 +1,7 @@
 ﻿﻿namespace spacebattle;
 public class SpaceShip
 {
-    public static double[] RectilinearMovement(double[] start, double[] speed, bool CanMove)
+    public static double[] RectilinearMovement(double[] start, double[] speed, bool canMove)
     {
         double[] empty = new double[] { };
         double[] finish = new double[2];
@@ -20,13 +20,51 @@ public class SpaceShip
             finish[0] = start[0] + speed[0];
             finish[1] = start[1] + speed[1];
         }
-        if (CanMove == false)
+        if (!canMove)
         {
             throw new System.ArgumentException();
         }
         else
         {
             return finish;
+        }
+    }
+
+    public static double Fuel(double FuelConsumption, double FuelReserve)
+    {
+        if (FuelReserve <= FuelConsumption)
+        {
+            throw new System.ArgumentException();
+        }
+        else
+        {
+            return FuelReserve - FuelConsumption;
+        }
+    }
+
+    public static double Rotation(double angle, double change, bool canRotate)
+    {
+        double newAngle;
+        if (Double.IsNaN(angle) || Double.IsInfinity(angle))
+        {
+            throw new System.ArgumentException();
+        }
+        else if (Double.IsNaN(change) || Double.IsInfinity(change))
+        {
+            throw new System.ArgumentException();
+        }
+        else 
+        {
+            newAngle = angle + change;
+        }
+        
+        if (!canRotate)
+        {
+            throw new System.ArgumentException();
+        }
+        else
+        {
+            return newAngle;
         }
     }
 }
